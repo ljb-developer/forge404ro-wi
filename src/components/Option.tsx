@@ -12,7 +12,7 @@ export default function OptionComponent({ token, onSelect }) {
     >
       {/* Main Image */}
       <img 
-        src={`https://smokerscircle.io/forge404/nfts/${pfp}.png`} 
+        src={`https://forge404.s3.eu-north-1.amazonaws.com/blackforge-nfts/${pfp}.png`} 
         style={{
           width: "140px", 
           height: "auto", 
