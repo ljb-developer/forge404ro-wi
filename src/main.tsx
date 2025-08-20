@@ -4,6 +4,7 @@ import { createWeb3Modal, defaultConfig } from '@web3modal/ethers/react'
 
 import "./main.css"
 import SignAndStore from "./SignAndStore";
+import ForgeConnect from "./components/ForgeConnect";
 
 const projectId = import.meta.env.VITE_PROJECT_ID;
 if (!projectId) throw new Error("Project ID is undefined");
@@ -54,7 +55,12 @@ createWeb3Modal({
   ethersConfig,
   chains: [base],
   projectId,
-  enableAnalytics: true, // Optional - defaults to your Cloud configuration
+  enableAnalytics: true, 
+    themeVariables: {
+    '--w3m-accent': '#000000ff', 
+    '--w3m-border-radius-master': '10px', 
+    '--w3m-font-family': 'Inter, sans-serif'
+  }
 })
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
@@ -62,7 +68,8 @@ ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
        <div className="main-container">
         <SignAndStore/> 
        
-          <w3m-button />
+          {/* <w3m-button /> */}
+          <ForgeConnect/>
         </div>
   </React.StrictMode>
 );

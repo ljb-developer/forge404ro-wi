@@ -45,7 +45,7 @@ export default function OptionComponent({ token, onSelect }) {
           onClick={() => onSelect(pfp)}
         >
           <img 
-            src="/images/forgenow.gif"
+            src="/images/forgenow-blue2.gif"
             alt="Forge"
             style={{
               width: "100%",
