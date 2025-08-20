@@ -19,7 +19,7 @@ export default function TokenComponent({ token, onSelect }) {
       
       {/* Main Image */}
       <img 
-        src={`/nfts/${pfp}.png`} 
+        src={`https://smokerscircle.io/forge404/nfts/${pfp}.png`} 
         style={{
           width: "180px", 
           height: "auto", 
