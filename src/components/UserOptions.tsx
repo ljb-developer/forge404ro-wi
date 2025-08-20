@@ -1,4 +1,4 @@
-import jsonData from '../../data/forge_data_20240717.json'; // true one: forge_data_20240613
+//import jsonData from '../../data/forge_data_20240717.json'; // true one: forge_data_20240613
 import OptionComponent from './Option';
 
 export function UserOptions(props) {
@@ -6,7 +6,7 @@ export function UserOptions(props) {
   let accountAddress = props.userAddress;
   let nfts = props.forgedTokens ?? [];
    
-  let nftIds = jsonData?.[accountAddress]?.nft_ids ?? [];
+  //let nftIds = jsonData?.[accountAddress]?.nft_ids ?? [];
   // let balance = jsonData?.[accountAddress]?.eligible_forge_airdrop_amount ?? 0;
   // let benefits = jsonData?.[accountAddress]?.eligible_for_benifits ?? false; 
 
