@@ -61,98 +61,132 @@ export function SignAndStore() {
   const [options, setOptions] = useState([]);
   const [commitment, setCommitment] = useState(false);
 
-  async function forgeToken(tokenId) {
-    try {
-      if (!isConnected) throw Error("User disconnected");
+async function forgeToken(tokenId) {
+  try {
+    if (!isConnected) throw Error("User disconnected");
 
-      const ethersProvider = new BrowserProvider(walletProvider);
-      const signer = await ethersProvider.getSigner();
+    const ethersProvider = walletProvider ? new BrowserProvider(walletProvider) : null
+    const signer = await ethersProvider.getSigner();
 
-      const ForgeContract = new Contract(contractAddress, abi, signer);
-      const ForgeResult = await ForgeContract.forge(tokenId);
+    const ForgeContract = new Contract(contractAddress, abi, signer);
 
-      console.log("Forged #:", ForgeResult);
+    const tx = await ForgeContract.forge(tokenId);
+    console.log("Tx submitted:", tx.hash);
 
-    } catch (error) {
-      if (error.reason !== undefined) {
-        console.log("Revert reason:", error.reason);
-        alert(error.reason + "!");
-      } else {
-        alert("Please connect your wallet first!");
-      }
+    const receipt = await tx.wait();
+    console.log("Tx confirmed:", receipt);
+
+    forgedList();
+
+  } catch (error) {
+    if (error.reason !== undefined) {
+      console.log("Revert reason:", error.reason);
+      alert(error.reason + "!");
+    } else {
+      console.error(error);
+      alert("Please connect your wallet first!");
     }
   }
+}
 
 
-  async function forgeAll() {
-    try {
-      if (!isConnected) throw Error("User disconnected");
 
-      const ethersProvider = new BrowserProvider(walletProvider);
-      const signer = await ethersProvider.getSigner();
+async function forgeAll() {
+  try {
+    if (!isConnected) throw Error("User disconnected");
 
-      const ForgeContract = new Contract(contractAddress, abi, signer);
-      const ForgeResult = await ForgeContract.forgeAll();
-console.log("xxx");
-    console.log("Forged all collected Options", ForgeResult);
+    const ethersProvider = new BrowserProvider(walletProvider);
+    const signer = await ethersProvider.getSigner();
 
-    } catch (error) {
-      if (error.reason !== undefined) {
-        console.log("Revert reason:", error.reason);
-        alert(error.reason + "!");
-      } else {
-        alert("Please connect your wallet first!");
-      }
+    const ForgeContract = new Contract(contractAddress, abi, signer);
+
+    const tx = await ForgeContract.forgeAll();
+    console.log("Tx submitted:", tx.hash);
+
+    const receipt = await tx.wait();
+    console.log("Tx confirmed:", receipt);
+
+    forgedList();
+
+  } catch (error) {
+    if (error.reason !== undefined) {
+      console.log("Revert reason:", error.reason);
+      alert(error.reason + "!");
+    } else {
+      console.error(error);
+      alert("Please connect your wallet first!");
     }
   }
+}
 
 
-    async function dissolveToken(tokenId) {
-    try {
-      if (!isConnected) throw Error("User disconnected");
 
-      const ethersProvider = new BrowserProvider(walletProvider);
-      const signer = await ethersProvider.getSigner();
+async function dissolveToken(tokenId) {
+  try {
+    if (!isConnected) throw Error("User disconnected");
 
-      const ForgeContract = new Contract(contractAddress, abi, signer);
-      const ForgeResult = await ForgeContract.dissolve(tokenId);
+    const ethersProvider = new BrowserProvider(walletProvider);
+    const signer = await ethersProvider.getSigner();
 
-      console.log("Dissolved #:", ForgeResult);
+    const ForgeContract = new Contract(contractAddress, abi, signer);
 
-    } catch (error) {
-      if (error.reason !== undefined) {
-        console.log("Revert reason:", error.reason);
-        alert(error.reason + "!");
-      } else {
-        alert("Please connect your wallet first!");
-      }
+    // Send tx
+    const tx = await ForgeContract.dissolve(tokenId);
+    console.log("Tx submitted:", tx.hash);
+
+    // Wait for mining
+    const receipt = await tx.wait();
+    console.log("Tx confirmed:", receipt);
+
+    // Refresh list only after tx confirmed
+    forgedList();
+
+  } catch (error) {
+    if (error.reason !== undefined) {
+      console.log("Revert reason:", error.reason);
+      alert(error.reason + "!");
+    } else {
+      console.error(error);
+      alert("Please connect your wallet first!");
     }
   }
+}
 
 
-  async function finalizeCommitment() {
-    try {
-      if (!isConnected) throw Error("User disconnected");
 
-      const ethersProvider = new BrowserProvider(walletProvider);
-      const signer = await ethersProvider.getSigner();
+async function finalizeCommitment() {
+  try {
+    if (!isConnected) throw Error("User disconnected");
 
-      const ForgeContract = new Contract(contractAddress, abi, signer);
-      const ForgeResult = await ForgeContract.finalizePreviousCommitment();
+    const ethersProvider = new BrowserProvider(walletProvider);
+    const signer = await ethersProvider.getSigner();
 
-      setCommitment(false);
+    const ForgeContract = new Contract(contractAddress, abi, signer);
 
-    console.log("Commitment finalized!")
+    // Send tx
+    const tx = await ForgeContract.finalizePreviousCommitment();
+    console.log("Tx submitted:", tx.hash);
 
-    } catch (error) {
-      if (error.reason !== undefined) {
-        console.log("Revert reason:", error.reason);
-        alert(error.reason + "!");
-      } else {
-        alert("Please connect your wallet first!");
-      }
+    // Wait for mining
+    const receipt = await tx.wait();
+    console.log("Tx confirmed:", receipt);
+
+    // Only update state after confirmation
+    setCommitment(false);
+    console.log("Commitment finalized!");
+    forgedList();
+
+  } catch (error) {
+    if (error.reason !== undefined) {
+      console.log("Revert reason:", error.reason);
+      alert(error.reason + "!");
+    } else {
+      console.error(error);
+      alert("Please connect your wallet first!");
     }
   }
+}
+
 
 
   const contractForge = (tokenId) => {
@@ -177,26 +211,7 @@ console.log("xxx");
 
   };
 
-  // async function claimTokens() {
-  //   try {
-  //     if (!isConnected) throw Error("User disconnected");
-
-  //     const ethersProvider = new BrowserProvider(walletProvider);
-  //     const signer = await ethersProvider.getSigner();
-
-  //     const USDTContract = new Contract(contractAddress, abi, signer);
-  //     const USDTResult = await USDTContract.claim();
-
-  //     console.log("Result: ", USDTResult);
-  //   } catch (error) {
-  //     if (error.reason !== undefined) {
-  //       console.log("Revert reason:", error.reason);
-  //       alert(error.reason + "!");
-  //     } else {
-  //       alert("Please connect your wallet first!");
-  //     }
-  //   }
-  // }
+ 
 
   async function forgedList() {
     try {
@@ -232,9 +247,14 @@ console.log("xxx");
   useEffect(() => {
 
     if (!isConnected) setForged([]);
-    forgedList();
 
-  }, [isConnected]); 
+    if (isConnected) {
+      forgedList();
+    }
+
+    
+
+  }, [address, chainId, isConnected]); 
   
   
 
