@@ -48,7 +48,7 @@ export default function OptionComponent({ token, onSelect }) {
             color: "black",
             fontSize: "14px",
             fontWeight: "normal",
-            width: "118px",
+            width: "128px",
             backgroundColor: "white"
           }}>
             Click to Forge

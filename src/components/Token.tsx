@@ -55,7 +55,7 @@ export default function TokenComponent({ token, onSelect }) {
             color: "black",
             fontSize: "16px",
             fontWeight: "normal",
-            width: "118px",
+            width: "128px",
             backgroundColor: "white"
           }}>
             Click to Dissolve
