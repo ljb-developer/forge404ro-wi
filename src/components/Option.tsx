@@ -14,7 +14,7 @@ export default function OptionComponent({ token, onSelect }) {
       <img 
         src={`https://forge404.s3.eu-north-1.amazonaws.com/blackforge-nfts/${pfp}.png`} 
         style={{
-          width: "140px", 
+          width: "150px", 
           height: "auto", 
           border: "1px solid white", 
           borderRadius: "4px"
