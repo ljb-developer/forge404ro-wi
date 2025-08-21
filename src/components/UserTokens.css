@@ -1,33 +1,27 @@
-/* style={{margin: "0px 20px 40px 20px", justifyContent: "center", width: "730px", display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px"}}
- */
-
+/* ========== USER TOKENS ========== */
 .user-tokens {
+  margin: 0px 20px 40px 20px;
+  justify-content: center;
+  width: 730px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 
-    margin: 0px 20px 40px 20px;
-    justify-content: center;
-    width: 730px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
+/* Default: 5 per row */
+.user-tokens > * {
+  flex: 0 1 calc((100% - (5 - 1) * 10px) / 5);
+  box-sizing: border-box;
+  min-width: 0;
+}
 
-
-    }
-
-
+/* Mobile: 2 per row */
 @media (max-width: 767px) {
-
-.user-tokens {
-
-    margin: 0px 20px 40px 20px;
-    justify-content: center;
-    width: 730px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 10px;
-
-
-    }
-
+  .user-tokens {
+    width: 100%;
+  }
+  .user-tokens > * {
+    flex: 0 1 calc((100% - (2 - 1) * 10px) / 2);
+  }
 }
