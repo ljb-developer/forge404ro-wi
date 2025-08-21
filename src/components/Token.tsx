@@ -12,7 +12,7 @@ export default function TokenComponent({ token, onSelect }) {
   return (
 
     <div 
-      style={{ position: "relative", display: "inline-block", cursor: "pointer" }}
+      style={{ position: "relative", display: "inline-block", cursor: "pointer", width: "16vw" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
@@ -21,7 +21,7 @@ export default function TokenComponent({ token, onSelect }) {
       <img 
         src={`https://forge404.s3.eu-north-1.amazonaws.com/blackforge-nfts/${pfp}.png`} 
         style={{
-          width: "140px", 
+          width: "100%", 
           height: "auto", 
           border: "1px solid white", 
           borderRadius: "4px"
@@ -36,7 +36,7 @@ export default function TokenComponent({ token, onSelect }) {
             position: "absolute",
             top: 8,
             left: 0,
-            width: "140px",
+            width: "16vw",
             height: "auto",
             borderRadius: "4px",
             opacity: 0.8,
