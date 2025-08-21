@@ -17,6 +17,24 @@
   min-width: 0;
 }
 
+.isHoverOption {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 140px;
+  height: auto;
+  border-radius: 4px;
+  opacity: 0.8;
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Mobile: 2 per row */
 @media (max-width: 767px) {
   .user-options {
@@ -25,4 +43,25 @@
   .user-options > * {
     flex: 0 1 calc((100% - (2 - 1) * 10px) / 2);
   }
+
+    .isHoverOption {
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    width: 140px;
+    height: auto;
+    border-radius: 4px;
+    opacity: 0.8;
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+
 }
+
+

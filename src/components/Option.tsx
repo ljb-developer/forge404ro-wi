@@ -25,23 +25,7 @@ export default function OptionComponent({ token, onSelect }) {
       {/* Hover Image and Text */}
       {isHovered && (
         <div
-          style={{
-            position: "absolute",
-            top: 8,
-            left: 0,
-            width: "140px",
-            height: "auto",
-            borderRadius: "4px",
-            opacity: 0.8,
-            textAlign: "center",
-            color: "white",
-            fontSize: "14px",
-            fontWeight: "bold",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
+          className="isHoverOption"
           onClick={() => onSelect(pfp)}
         >
           <img 
