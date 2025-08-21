@@ -1,0 +1,33 @@
+/* style={{margin: "0px 20px 40px 20px", justifyContent: "center", width: "730px", display: "flex", flexDirection: "row", flexWrap: "wrap", gap: "10px"}}
+ */
+
+.user-tokens {
+
+    margin: 0px 20px 40px 20px;
+    justify-content: center;
+    width: 730px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+
+
+    }
+
+
+@media (max-width: 767px) {
+
+.user-tokens {
+
+    margin: 0px 20px 40px 20px;
+    justify-content: center;
+    width: 730px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+
+
+    }
+
+}
